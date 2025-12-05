@@ -1,0 +1,108 @@
+https://app.powerbi.com/view?r=eyJrIjoiZmM1NjM4MjctZWJkYS00ZTU0LWIwNWMtNGQyMjBhMGZhYTZkIiwidCI6IjNkYTYwZmNhLTk0MWMtNDIyMS1iN2UzLWVmM2NhMjliOGE2NSIsImMiOjl9
+
+
+***
+
+
+<iframe referrerpolicy="no-referrer-when-downgrade" height="600" width="1200" frameborder="0" src="&TESTO." title="iframe"></iframe>
+
+
+***
+
+
+https://platform.openai.com/settings/profile?tab=api-keys
+
+
+
+
+***
+
+SELECT JSON_SERIALIZE(
+ JSON_ARRAYAGG( 
+    JSON_OBJECT( 
+           'ID'                                  VALUE c.ID,
+           'DATA'                                VALUE TO_CHAR(c.DATA, 'YYYY-MM-DD'),
+           'USCITE'                              VALUE c.USCITE,
+           'ENTRATE'                             VALUE c.ENTRATE,
+           'SALDO'                               VALUE c.SALDO,
+           'DESCRIZIONE_MOVIMENTO'               VALUE c.DESCRIZIONE_MOVIMENTO,
+           'DESCRIZIONE_ATTIVITA_FINANZIARIA_ID' VALUE c.DESCRIZIONE_ATTIVITA_FINANZIARIA_ID,
+           'DESCRIZIONE_ATTIVITA_FINANZIARIA'    VALUE l.DESCRIZIONE_ATTIVITA_FINANZIARIA
+       returning clob
+       ) 
+     returning clob
+     )
+ ) AS MOVIMENTO_JSON
+FROM DEMO_CONTI_CORRENTI c --MODIFICARE IL NOME DELLA TABELLA A SECONDA DI COME E' STATA RINOMINATA
+LEFT JOIN DESCRIZIONE_ATTIVITA_FINANZIARIA_LOOKUP l --MODIFICARE IL NOME DELLA TABELLA A SECONDA DI COME E' STATA RINOMINATA
+
+    ON c.DESCRIZIONE_ATTIVITA_FINANZIARIA_ID = l.DESCRIZIONE_ATTIVITA_FINANZIARIA_ID
+WHERE
+    l.DESCRIZIONE_ATTIVITA_FINANZIARIA_ID = :P8_DESCRIZIONE_ATTIVITA_FINANZIARIA_ID
+GROUP BY
+    l.DESCRIZIONE_ATTIVITA_FINANZIARIA_ID, l.DESCRIZIONE_ATTIVITA_FINANZIARIA;
+
+
+***
+
+
+Ciao ChatGPT, questi dati in formato JSON sono i movimenti dei conti correnti. Puoi rispondere in formato markdown.
+
+***
+
+Tutti i dettagli sono stati inviati come richiesta
+
+
+***
+
+Puoi aiutarmi a verificare le anomalie nei movimenti dei conti correnti con particolare riferimento alle uscite per prelevamenti Bancomat e verso Maria Rossi?
+
+
+
+***
+
+Ciao ChatGPT, questi dati in formato JSON sono i movimenti dei conti correnti. Puoi rispondere in formato markdown.
+
+
+***
+
+Tutti i dettagli sono stati inviati come richiesta
+
+
+***
+
+Puoi aiutarmi a verificare le anomalie nelle uscite dei conti correnti tenendo conto che l’intestataria o co-intestataria è molto anziana e tutte le bollette sono addebitate con rid? Inoltre, verifica le uscite verso Rossi Maria e le uscite per prelevamento allo sportello o tramite Bancomat, tenendo conto che essendo molto anziana l’intestataria del conto corrente saranno state effettuate dalla co-intestataria Rossi Maria.
+
+
+
+
+***
+
+
+Premesso che questa è la tabella dove sono indicati gli intestatari dei conti correnti correlati ai conti correnti che stai analizzando:
+BancaNome	Tipo attività finanziaria	Descrizione attività finanziaria	Intestatari
+UNICREDIT	Conto corrente	Unicredit c/c 1 poi c/c 2	Rossi Alfredo, Colombo Lucia
+CESARE PONTI	Conto corrente	Cesare Ponti c/c 1	Rossi Maria
+BPM	Conto corrente	BPM c/c 2	Colombo Lucia, Rossi Maria
+BPM	Conto corrente	BPM c/c 1	Rossi Alfredo, Colombo Lucia, Rossi Maria
+CR PARMA PIACENZA	Conto corrente	CR PR PC c/c 1	Rossi Alfredo, Rossi Maria
+CR PARMA PIACENZA	Conto corrente	CR PR PC c/c 2	Rossi Maria
+MEDIOLANUM	Conto corrente	MEDIOLANUM c/c 1	Colombo Lucia, Rossi Maria
+MEDIOLANUM	Conto corrente	MEDIOLANUM c/c 2	Rossi Maria
+INTESA SAN PAOLO	Conto corrente	INTESA SAN PAOLO c/c 2 (ex UBI c/c 2)	Colombo Lucia, Rossi Maria
+INTESA SAN PAOLO	Conto corrente	INTESA SAN PAOLO c/c 1 (ex UBI c/c 1)	Rossi Maria
+ 
+Premesso che Colombo Lucia è molto anziana e che quindi presumibilmente i prelevamenti bancomat sono stati effettuati da Rossi Maria.
+ 
+Potresti scrivere una sintetica lettera di resoconto al professionista incaricato con indicazione delle anomalie nelle uscite del conto corrente e considerazioni su eventuali criticità con particolare riferimento alle uscite per prelevamenti Bancomat e verso Roberta Maria? Dai anche il dettaglio analitico dei prelevamenti Bancomat e delle uscite verso Maria Rossi.
+
+
+***
+
+Incolla la risposta nel campo risposta
+
+***
+
+
+
+
